@@ -12,6 +12,7 @@ class Header extends Component {
       <div>
         <h1 className="title">React 小書</h1>
         {isGoodWord && <strong>is good</strong>}
+        {false ? <strong>is good</strong> : <span>is not good</span>}
       </div>
     );
   }
