@@ -5,10 +5,13 @@ import registerServiceWorker from './registerServiceWorker';
 import './index.css';
 
 class Header extends Component {
+
   render() {
+    const isGoodWord = true;
     return (
       <div>
         <h1 className="title">React 小書</h1>
+        {isGoodWord && <strong>is good</strong>}
       </div>
     );
   }
