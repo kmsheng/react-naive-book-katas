@@ -6,6 +6,10 @@ import './index.css';
 
 class Header extends Component {
 
+  renderMyHtml() {
+    return <div>My HTML</div>;
+  }
+
   render() {
     const isGoodWord = true;
     const pieceOfHtml = isGoodWord ? <span>yes its good word</span> : null;
@@ -15,6 +19,7 @@ class Header extends Component {
         {isGoodWord && <strong>is good</strong>}
         {false ? <strong>is good</strong> : <span>is not good</span>}
         {pieceOfHtml}
+        {this.renderMyHtml()}
       </div>
     );
   }
