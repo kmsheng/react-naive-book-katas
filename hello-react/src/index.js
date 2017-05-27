@@ -4,9 +4,14 @@ import registerServiceWorker from './registerServiceWorker';
 import './index.css';
 
 class Title extends Component {
+
+  handleClickOnTitle = (e) => {
+    console.log('clicked on title.');
+  };
+
   render () {
     return (
-      <h1>React 小书</h1>
+      <h1 onClick={this.handleClickOnTitle}>React 小书</h1>
     )
   }
 }
