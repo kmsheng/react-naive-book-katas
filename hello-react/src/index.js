@@ -4,28 +4,27 @@ import registerServiceWorker from './registerServiceWorker';
 import './index.css';
 
 class LikeButton extends Component {
-  constructor () {
-    super()
-    this.state = {
-      name: 'Tomy',
-      isLiked: false,
-      count: 0
-    }
+
+  static defaultProps = {
+    likeText: '點讚',
+    cancelText: '取消'
+  };
+
+  constructor() {
+    super();
+    this.state = {isLiked: false};
   }
 
-  handleClickOnLikeButton () {
-    this.setState({
-      isLiked: !this.state.isLiked
-    })
-    this.setState((prevState) => ({count: prevState.count + 1}));
-  }
+  handleClickOnLikeButton = () => {
+    this.setState((prevState) => ({isLiked: ! prevState.isLiked}));
+  };
 
   render () {
-    const {isLiked, count} = this.state;
+    const {isLiked} = this.state;
+    const {likeText, cancelText} = this.props;
     return (
-      <button onClick={this.handleClickOnLikeButton.bind(this)}>
-        {isLiked ? '取消' : '点赞'} 👍
-        {count}
+      <button onClick={this.handleClickOnLikeButton}>
+        {isLiked ? cancelText : likeText} 👍
       </button>
     )
   }
@@ -35,7 +34,7 @@ class Index extends Component {
   render () {
     return (
       <div>
-        <LikeButton />
+        <LikeButton likeText="like" cancelText="cacnel" />
       </div>
     )
   }
