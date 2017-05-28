@@ -1,0 +1,158 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>3 DOM optimization</title>
+  <style>
+    .burger {
+      display: inline-block;
+      width: 100px;
+      padding: 20px;
+    }
+    .burger:hover .bun.top {
+      transform: rotate(7deg);
+    }
+    .burger:hover .bun.bottom {
+      transform: rotate(-7deg);
+    }
+    .burger:hover .sauce {
+      transform: rotate(3deg);
+    }
+    .burger:hover .meat.first {
+      transform: rotate(3deg);
+    }
+    .burger:hover .meat.second {
+      transform: rotate(-3deg);
+    }
+    .burger:hover .cheese {
+      transform: rotate(-5deg);
+    }
+    .burger:hover .bun.top, .burger:hover .bun.bottom {
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+    .burger:hover .sauce, .burger:hover .meat, .burger:hover .cucumber, .burger:hover .lettuce, .burger:hover .cheese {
+      margin-top: 4px;
+      margin-bottom: 4px;
+    }
+    .burger .bun {
+      transition: .3s all;
+      background: repeating-linear-gradient(90deg, #f7a724, #f7a724 40px, #f37e16 40px, #f37e16 100%);
+    }
+    .burger .bun.top {
+      height: 30px;
+      border-top-left-radius: 50%;
+      border-top-right-radius: 50%;
+      border-bottom-left-radius: 4px;
+      border-bottom-right-radius: 4px;
+    }
+    .burger .bun.bottom {
+      height: 16px;
+      border-top-left-radius: 4px;
+      border-top-right-radius: 4px;
+      border-bottom-left-radius: 25%;
+      border-bottom-right-radius: 25%;
+    }
+    .burger .sauce {
+      transition: all 0.3s;
+      position: relative;
+      height: 4px;
+      border-radius: 4px;
+      background: repeating-linear-gradient(90deg, #d74214, #d74214 40px, #bd360c 40px, #bd360c 100%);
+    }
+    .burger .sauce:before, .burger .sauce:after {
+      background-color: #bd360c;
+      content: ' ';
+      position: absolute;
+    }
+    .burger .sauce:before {
+      right: 30px;
+      width: 10px;
+      height: 10px;
+      border-bottom-left-radius: 50%;
+      border-bottom-right-radius: 50%;
+    }
+    .burger .sauce:after {
+      right: 12px;
+      width: 12px;
+      height: 12px;
+      border-bottom-left-radius: 50%;
+      border-bottom-right-radius: 50%;
+    }
+    .burger .cucumber {
+      height: 4px;
+      border-rdius: 4px;
+      background-color: #66b96a;
+    }
+    .burger .lettuce {
+      height: 4px;
+      border-radius: 4px;
+      background-color: #429f46;
+    }
+    .burger .meat {
+      transition: all 0.3s;
+      height: 17px;
+      background: repeating-linear-gradient(90deg, #5c4036, #5c4036 40px, #4e342e 40px, #4e342e 100%);
+      border-radius: 6px;
+    }
+    .burger .cheese {
+      transition: all 0.3s;
+      position: relative;
+      height: 4px;
+      border-radius: 4px;
+      background: repeating-linear-gradient(90deg, #ffed58, #ffed58 40px, #fbd734 40px, #fbd734 100%);
+    }
+    .burger .cheese:before, .burger .cheese:after {
+      background-color: #ffed58;
+      content: ' ';
+      position: absolute;
+    }
+    .burger .cheese:before {
+      left: 10px;
+      width: 12px;
+      height: 14px;
+      border-bottom-left-radius: 50%;
+      border-bottom-right-radius: 50%;
+    }
+    .burger .cheese:after {
+      left: 27px;
+      width: 9px;
+      height: 8px;
+      border-bottom-left-radius: 50%;
+      border-bottom-right-radius: 50%;
+    }
+
+    #btn-add-meat {
+      display: inline-block;
+      vertical-align: top;
+      margin-top: 14px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="burger">
+    <div class="bun top"></div>
+    <div class="sauce"></div>
+    <div class="meat first"></div>
+    <div class="cucumber"></div>
+    <div class="lettuce"></div>
+    <div class="meat second"></div>
+    <div class="cheese"></div>
+    <div class="bun bottom"></div>
+  </div>
+
+  <button id="btn-add-meat">add a piece of meat</button>
+  <script>
+    const btnAddMeat = document.getElementById('btn-add-meat');
+    const [burger] = document.getElementsByClassName('burger');
+    const [sauce] = burger.getElementsByClassName('sauce');
+
+    btnAddMeat.addEventListener('click', () => {
+      const newMeat = document.createElement('div');
+      newMeat.className = 'meat';
+      burger.insertBefore(newMeat, sauce);
+    });
+  </script>
+</body>
+</html>
