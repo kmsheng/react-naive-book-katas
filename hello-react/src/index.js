@@ -14,6 +14,18 @@ class Clock extends Component {
     };
   }
 
+  /*shouldComponentUpdate(nextProps, nextState) {
+  }
+
+  componentWillReceiveProps(nextProps) {
+  }
+
+  componentWillUpdate(nextProps, nextState) {
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+  }*/
+
   tick = () => {
     this.setState({
       date: new Date(),
