@@ -4,68 +4,30 @@ import registerServiceWorker from './registerServiceWorker';
 
 import './index.css';
 
-class Clock extends Component {
+class AutoFocusInput extends Component {
 
-  constructor() {
-    super();
-    this.state = {
-      date: new Date(),
-      timer: null
-    };
+  componentDidMount() {
+    this.input.focus();
   }
 
-  /*shouldComponentUpdate(nextProps, nextState) {
-  }
-
-  componentWillReceiveProps(nextProps) {
-  }
-
-  componentWillUpdate(nextProps, nextState) {
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-  }*/
-
-  tick = () => {
-    this.setState({
-      date: new Date(),
-      timer: requestAnimationFrame(this.tick)
-    });
-  };
-
-  componentWillMount() {
-    this.setState({timer: requestAnimationFrame(this.tick)});
-  }
-
-  componentWillUnmount() {
-    cancelAnimationFrame(this.state.timer);
+  focus() {
+    this.input.focus();
   }
 
   render() {
-    const {date} = this.state;
-    return (
-      <div>{`${date.toLocaleTimeString()}:${date.getMilliseconds()}`}</div>
-    );
+    return <input ref={(input) => this.input = input} />
   }
 }
 
 class Index extends Component {
 
-  constructor() {
-    super();
-    this.state = {isClockVisible: true};
-  }
-
-  toggleClock = () => {
-    this.setState(({isClockVisible}) => ({isClockVisible: ! isClockVisible}));
-  };
+  handleButtonClick = () => this.refs.autoFocusInput.focus();
 
   render () {
-    const {isClockVisible} = this.state;
     return (
       <div>
-        {isClockVisible && <Clock />}
-        <button onClick={this.toggleClock}>Toggle Clock</button>
+        <AutoFocusInput ref="autoFocusInput" />
+        <button onClick={this.handleButtonClick}>focus !</button>
       </div>
     )
   }
