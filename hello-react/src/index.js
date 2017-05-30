@@ -19,6 +19,10 @@ class Header extends Component {
     console.log('component did mount');
   }
 
+  componentWillUnmount() {
+    console.log('component will unmount');
+  }
+
   render () {
     console.log('render');
     return (
@@ -30,10 +34,22 @@ class Header extends Component {
 }
 
 class Index extends Component {
+
+  constructor() {
+    super();
+    this.state = {isHeaderVisible: true};
+  }
+
+  toggleHeader = () => {
+    this.setState(({isHeaderVisible}) => ({isHeaderVisible: ! isHeaderVisible}));
+  };
+
   render () {
+    const {isHeaderVisible} = this.state;
     return (
       <div>
-        <Header />
+        {isHeaderVisible && <Header />}
+        <button onClick={this.toggleHeader}>Toggle Header</button>
       </div>
     )
   }
