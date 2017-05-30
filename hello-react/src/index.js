@@ -4,32 +4,36 @@ import registerServiceWorker from './registerServiceWorker';
 
 import './index.css';
 
-class Header extends Component {
+class Clock extends Component {
 
-  constructor () {
+  constructor() {
     super();
-    console.log('construct');
+    this.state = {
+      date: new Date(),
+      timer: null
+    };
   }
 
-  componentWillMount () {
-    console.log('component will mount');
-  }
+  tick = () => {
+    this.setState({
+      date: new Date(),
+      timer: requestAnimationFrame(this.tick)
+    });
+  };
 
-  componentDidMount () {
-    console.log('component did mount');
+  componentWillMount() {
+    this.setState({timer: requestAnimationFrame(this.tick)});
   }
 
   componentWillUnmount() {
-    console.log('component will unmount');
+    cancelAnimationFrame(this.state.timer);
   }
 
-  render () {
-    console.log('render');
+  render() {
+    const {date} = this.state;
     return (
-      <div>
-        <h1 className="title">React 小书</h1>
-      </div>
-    )
+      <div>{`${date.toLocaleTimeString()}:${date.getMilliseconds()}`}</div>
+    );
   }
 }
 
@@ -37,19 +41,19 @@ class Index extends Component {
 
   constructor() {
     super();
-    this.state = {isHeaderVisible: true};
+    this.state = {isClockVisible: true};
   }
 
-  toggleHeader = () => {
-    this.setState(({isHeaderVisible}) => ({isHeaderVisible: ! isHeaderVisible}));
+  toggleClock = () => {
+    this.setState(({isClockVisible}) => ({isClockVisible: ! isClockVisible}));
   };
 
   render () {
-    const {isHeaderVisible} = this.state;
+    const {isClockVisible} = this.state;
     return (
       <div>
-        {isHeaderVisible && <Header />}
-        <button onClick={this.toggleHeader}>Toggle Header</button>
+        {isClockVisible && <Clock />}
+        <button onClick={this.toggleClock}>Toggle Clock</button>
       </div>
     )
   }
