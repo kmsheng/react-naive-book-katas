@@ -26,7 +26,13 @@ export default class Comment extends Component {
 
   renderCommntContent() {
     const {comment} = this.props;
-    return comment.content.replace(/`(.+)`/, (match, word) => `<code>${word}</code>`);
+    return comment.content
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;')
+      .replace(/`([\S\s]+?)`/g, '<code>$1</code>')
   }
 
   render () {
@@ -36,7 +42,6 @@ export default class Comment extends Component {
         <div className="comment-user">
           <span>{comment.username}</span>：
         </div>
-        {/*this might cause xss. e.g. <img src="" onerror="alert(1)" />*/}
         <p dangerouslySetInnerHTML={{__html: this.renderCommntContent()}} />
         {this.renderCreatedAt()}
         <button onClick={this.handleDeleteButtonClick(comment)}>delete</button>
