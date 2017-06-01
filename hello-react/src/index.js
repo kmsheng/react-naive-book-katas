@@ -7,18 +7,16 @@ import './index.css';
 
 class Editor extends Component {
 
-  constructor(props) {
-    super(props)
-    this.state = {
-      content: '<h1>React.js 小书</h1>'
-    }
-  }
+  static propTypes = {
+    message: PropTypes.string.isRequired
+  };
 
   render () {
+    const {message} = this.props;
     return (
       <div className="editor-wrapper">
-        {this.state.content}
-        <div style={{fontSize: '30px'}} dangerouslySetInnerHTML={{__html: this.state.content}} />
+        {message}
+        <div style={{fontSize: '30px'}} dangerouslySetInnerHTML={{__html: message}} />
       </div>
     )
   }
@@ -29,7 +27,7 @@ class Index extends Component {
   render() {
     return (
       <div>
-        <Editor />
+        <Editor message="hello world" />
       </div>
     );
   }
