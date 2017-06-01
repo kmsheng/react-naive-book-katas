@@ -20,13 +20,9 @@ export default class CommentApp extends Component {
     localStorage.setItem(CACHE_KEY, JSON.stringify(newComments));
   };
 
-  handleDeleteButtonClick = (targetComment) => {
+  handleDeleteButtonClick = (targetIndex) => {
     this.setState((prevState, props) => {
-      const newComments = prevState.comments.filter((comment) => {
-        return (comment.username !== targetComment.username) ||
-          (comment.createdAt !== targetComment.createdAt) ||
-          (comment.content !== targetComment.content);
-      });
+      const newComments = prevState.comments.filter((comment, index) => index !== targetIndex);
       localStorage.setItem(CACHE_KEY, JSON.stringify(newComments));
       return {
         comments: newComments

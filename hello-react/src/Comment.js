@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 export default class Comment extends Component {
 
   static propTypes = {
+    index: PropTypes.number.isRequired,
     onDeleteButtonClick: PropTypes.func.isRequired
   };
 
@@ -20,8 +21,9 @@ export default class Comment extends Component {
     }
   }
 
-  handleDeleteButtonClick = (comment) => {
-    return () => this.props.onDeleteButtonClick(comment);
+  handleDeleteButtonClick = () => {
+    const {onDeleteButtonClick, index} = this.props;
+    onDeleteButtonClick(index);
   };
 
   renderCommntContent() {
@@ -44,7 +46,7 @@ export default class Comment extends Component {
         </div>
         <p dangerouslySetInnerHTML={{__html: this.renderCommntContent()}} />
         {this.renderCreatedAt()}
-        <button onClick={this.handleDeleteButtonClick(comment)}>delete</button>
+        <button onClick={this.handleDeleteButtonClick}>delete</button>
       </div>
     )
   }

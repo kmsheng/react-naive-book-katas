@@ -17,7 +17,7 @@ export default class CommentList extends Component {
   renderComments() {
     const {comments, onDeleteButtonClick} = this.props;
     return comments.map((comment, index) => {
-      return <Comment comment={comment} key={index} onDeleteButtonClick={onDeleteButtonClick} />;
+      return <Comment index={index} comment={comment} key={index} onDeleteButtonClick={onDeleteButtonClick} />;
     });
   }
 
