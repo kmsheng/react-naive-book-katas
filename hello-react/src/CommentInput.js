@@ -15,6 +15,10 @@ export default class CommentInput extends Component {
       }
   }
 
+  componentDidMount() {
+    this.refs.commentInput.focus();
+  }
+
   handleUsernamChange = (event) => {
     this.setState({username: event.target.value});
   };
@@ -41,7 +45,7 @@ export default class CommentInput extends Component {
         <div className="comment-field">
           <span className="comment-field-name">用户名：</span>
           <div className="comment-field-input">
-          <input value={username} onChange={this.handleUsernamChange} />
+          <input ref="commentInput" value={username} onChange={this.handleUsernamChange} />
         </div>
         </div>
         <div className="comment-field">
