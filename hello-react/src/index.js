@@ -5,29 +5,22 @@ import PropTypes from 'prop-types';
 
 import './index.css';
 
-export class Breadcrumb extends Component {
+class Editor extends Component {
 
-  static propTypes = {
-    children: PropTypes.oneOfType([
-      PropTypes.array.isRequired,
-      PropTypes.object.isRequired
-    ])
-  };
-
-  renderListContent() {
-
-    const {children} = this.props;
-
-    if ('function' === typeof children.map) {
-      return children.map((child, index) => {
-        return <li key={`breadcrumb-item-${index}`}>{child}</li>;
-      });
+  constructor(props) {
+    super(props)
+    this.state = {
+      content: '<h1>React.js 小书</h1>'
     }
-    return <li key="breadcrumb-item">{children}</li>;
   }
 
-  render() {
-    return <ul className="breadcrumb">{this.renderListContent()}</ul>;
+  render () {
+    return (
+      <div className="editor-wrapper">
+        {this.state.content}
+        <div style={{fontSize: '30px'}} dangerouslySetInnerHTML={{__html: this.state.content}} />
+      </div>
+    )
   }
 }
 
@@ -36,11 +29,7 @@ class Index extends Component {
   render() {
     return (
       <div>
-        <Breadcrumb>
-          <a href="/hello">hello</a>
-          <a href="/world">world</a>
-          <a href="/blah">blah</a>
-        </Breadcrumb>
+        <Editor />
       </div>
     );
   }
