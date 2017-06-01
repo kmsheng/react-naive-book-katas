@@ -6,7 +6,8 @@ import Comment from './Comment';
 export default class CommentList extends Component {
 
   static propTypes = {
-    comments: PropTypes.array
+    comments: PropTypes.array,
+    onDeleteButtonClick: PropTypes.func.isRequired
   };
 
   static defaultProps = {
@@ -14,9 +15,9 @@ export default class CommentList extends Component {
   };
 
   renderComments() {
-    const {comments} = this.props;
+    const {comments, onDeleteButtonClick} = this.props;
     return comments.map((comment, index) => {
-      return <Comment comment={comment} key={index} />;
+      return <Comment comment={comment} key={index} onDeleteButtonClick={onDeleteButtonClick} />;
     });
   }
 

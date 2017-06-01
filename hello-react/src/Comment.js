@@ -3,6 +3,10 @@ import PropTypes from 'prop-types';
 
 export default class Comment extends Component {
 
+  static propTypes = {
+    onDeleteButtonClick: PropTypes.func.isRequired
+  };
+
   static contextTypes = {
     now: PropTypes.number
   };
@@ -16,6 +20,10 @@ export default class Comment extends Component {
     }
   }
 
+  handleDeleteButtonClick = (comment) => {
+    return () => this.props.onDeleteButtonClick(comment);
+  };
+
   render () {
     const {comment} = this.props;
     return (
@@ -25,6 +33,7 @@ export default class Comment extends Component {
         </div>
         <p>{comment.content}</p>
         {this.renderCreatedAt()}
+        <button onClick={this.handleDeleteButtonClick(comment)}>delete</button>
       </div>
     )
   }

@@ -30,7 +30,6 @@ class Index extends Component {
 
   componentDidMount() {
     this.timer = setInterval(this.updateTime, 5000);
-    console.log('this.timer', this.timer);
   }
 
   componentWillUnmount() {
