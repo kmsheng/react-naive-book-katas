@@ -24,6 +24,11 @@ export default class Comment extends Component {
     return () => this.props.onDeleteButtonClick(comment);
   };
 
+  renderCommntContent() {
+    const {comment} = this.props;
+    return comment.content.replace(/`(.+)`/, (match, word) => `<code>${word}</code>`);
+  }
+
   render () {
     const {comment} = this.props;
     return (
@@ -31,7 +36,8 @@ export default class Comment extends Component {
         <div className="comment-user">
           <span>{comment.username}</span>：
         </div>
-        <p>{comment.content}</p>
+        {/*this might cause xss. e.g. <img src="" onerror="alert(1)" />*/}
+        <p dangerouslySetInnerHTML={{__html: this.renderCommntContent()}} />
         {this.renderCreatedAt()}
         <button onClick={this.handleDeleteButtonClick(comment)}>delete</button>
       </div>

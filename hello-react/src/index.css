@@ -101,3 +101,9 @@ body {
 .comment p {
   margin: 0;
 }
+
+code {
+  border: 1px solid #ccc;
+  background: #f9f9f9;
+  padding: 0px 2px;
+}
