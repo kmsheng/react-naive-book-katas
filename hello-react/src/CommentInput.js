@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
+const CACHE_KEY = 'username';
+
 export default class CommentInput extends Component {
 
   static propTypes = {
@@ -10,7 +12,7 @@ export default class CommentInput extends Component {
   constructor () {
     super()
       this.state = {
-        username: '',
+        username: localStorage.getItem(CACHE_KEY) || '',
         content: ''
       }
   }
@@ -29,10 +31,12 @@ export default class CommentInput extends Component {
 
   handleSubmit = () => {
     const {onSubmit} = this.props;
+    const {username, content} = this.state;
+
     if (onSubmit) {
-      const {username, content} = this.state;
       onSubmit({username, content});
     }
+    localStorage.setItem(CACHE_KEY, username);
     this.setState({content: ''});
   };
 
