@@ -3,19 +3,22 @@ import React, {Component} from 'react';
 import CommentInput from './CommentInput';
 import CommentList from './CommentList';
 
+const CACHE_KEY = 'comments';
+
 export default class CommentApp extends Component {
 
   constructor() {
     super();
-    this.state = {
-      comments: []
-    };
+    const comments = JSON.parse(localStorage.getItem(CACHE_KEY)) || [];
+    this.state = {comments};
   }
 
   handleCommentSubmit = (comment) => {
     console.log('comment', comment);
     const {comments} = this.state;
-    this.setState({comments: [...comments, comment]});
+    const newComments = [...comments, comment];
+    this.setState({comments: newComments});
+    localStorage.setItem(CACHE_KEY, JSON.stringify(newComments));
   };
 
   render() {

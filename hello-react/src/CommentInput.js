@@ -34,7 +34,7 @@ export default class CommentInput extends Component {
     const {username, content} = this.state;
 
     if (onSubmit) {
-      onSubmit({username, content});
+      onSubmit({username, content, createdAt: +new Date()});
     }
     localStorage.setItem(CACHE_KEY, username);
     this.setState({content: ''});
