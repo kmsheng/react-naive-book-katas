@@ -2,10 +2,17 @@ import React, {Component} from 'react';
 
 import CommentInput from './CommentInput';
 import CommentList from './CommentList';
+import resolve from './helpers/resolve';
 
 const CACHE_KEY = 'comments';
 
-export default class CommentApp extends Component {
+const doAsyncStuff = () => {
+  return new Promise((resolve, reject) => {
+    setTimeout(resolve, 5000);
+  });
+};
+
+class CommentApp extends Component {
 
   constructor() {
     super();
@@ -40,3 +47,5 @@ export default class CommentApp extends Component {
     );
   }
 }
+
+export default resolve(doAsyncStuff)(CommentApp);
