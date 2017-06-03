@@ -26,7 +26,7 @@ function renderContent(content) {
   contentDOM.style.color = content.color;
 }
 
-function dispatch (action) {
+function dispatch(action) {
   switch (action.type) {
     case 'UPDATE_TITLE_TEXT':
       appState.title.text = action.text
