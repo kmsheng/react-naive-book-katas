@@ -28,24 +28,64 @@ class Main extends Component {
 }
 
 class Title extends Component {
+
+  static contextTypes = {
+    date: PropTypes.object
+  };
+
   render () {
     return (
-      <h1>React.js 小书标题</h1>
+      <div>
+        <h1>React.js 小书标题</h1>
+        <div>現在時間: {this.context.date.toString()}</div>
+      </div>
     )
   }
 }
 
 class Content extends Component {
+
+  static contextTypes = {
+    date: PropTypes.object
+  };
+
   render () {
     return (
     <div>
       <h2>React.js 小书内容</h2>
+      <div>現在時間: {this.context.date.toString()}</div>
     </div>
     )
   }
 }
 
 class Index extends Component {
+
+  static childContextTypes = {
+    date: PropTypes.object
+  };
+
+  constructor(props) {
+    super(props);
+    this.timer = null;
+    this.state = {
+      date: new Date()
+    };
+  }
+
+  getChildContext() {
+    return {date: this.state.date};
+  }
+
+  componentWillMount() {
+    this.timer = setInterval(() => {
+      this.setState({date: new Date()});
+    }, 1000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timer);
+  }
 
   render () {
     return (
