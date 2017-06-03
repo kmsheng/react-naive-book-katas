@@ -1,17 +1,29 @@
-import React, {Component} from 'react';
-import ReactDOM from 'react-dom';
-import registerServiceWorker from './registerServiceWorker';
-
-import './index.css';
-
-class Index extends Component {
-
-  render () {
-    return (
-      <div>React 小書</div>
-    )
+const appState = {
+  title: {
+    text: 'React.js 小书',
+    color: 'red',
+  },
+  content: {
+    text: 'React.js 小书内容',
+    color: 'blue'
   }
+};
+
+function renderApp(appState) {
+  renderTitle(appState.title);
+  renderContent(appState.content);
 }
 
-ReactDOM.render(<Index />, document.getElementById('root'));
-registerServiceWorker();
+function renderTitle(title) {
+  const titleDOM = document.getElementById('title');
+  titleDOM.innerHTML = title.text;
+  titleDOM.style.color = title.color;
+}
+
+function renderContent(content) {
+  const contentDOM = document.getElementById('content');
+  contentDOM.innerHTML = content.text;
+  contentDOM.style.color = content.color;
+}
+
+renderApp(appState);
