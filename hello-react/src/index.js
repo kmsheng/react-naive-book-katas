@@ -26,20 +26,28 @@ function renderContent(content) {
   contentDOM.style.color = content.color;
 }
 
-function dispatch(action) {
+function stateChanger(state, action) {
   switch (action.type) {
     case 'UPDATE_TITLE_TEXT':
-      appState.title.text = action.text
+      state.title.text = action.text
       break
     case 'UPDATE_TITLE_COLOR':
-      appState.title.color = action.color
+      state.title.color = action.color
       break
     default:
       break
   }
 }
 
-renderApp(appState);
-dispatch({type: 'UPDATE_TITLE_TEXT', text: '《  React.js 小书  》'});
-dispatch({type: 'UPDATE_TITLE_COLOR', color: 'blue'});
-renderApp(appState);
+function createStore(state, stateChanger) {
+  const getState = () => state;
+  const dispatch = (action) => stateChanger(state, action);
+  return {getState, dispatch};
+}
+
+const store = createStore(appState, stateChanger);
+
+renderApp(store.getState());
+store.dispatch({type: 'UPDATE_TITLE_TEXT', text: '《  React.js 小书  》'});
+store.dispatch({type: 'UPDATE_TITLE_COLOR', color: 'blue'});
+renderApp(store.getState());
